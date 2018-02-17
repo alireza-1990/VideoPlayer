@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Numbrs Video Player</string>
+    <string name="volume_up">+</string>
+    <string name="volume_down">-</string>
+
+    <string name="read_storage_rationale">To list your videos we need to access device storage</string>
+    <string name="access_denied">Access Denied</string>
+    <string name="permission_denied_description">Sorry, This app can not work without storage permission. If you want to set the permission click retry</string>
+    <string name="retry">retry</string>
+    <string name="exit">exit</string>
+    <string name="all_videos">All Videos</string>
+    <string name="palylists">PlayLists</string>
+    <string name="add">Add</string>
+    <string name="add_new_playlist_hint">Create New Playlist</string>
+    <string name="select_playlist">Select Playlist</string>
+    <string name="add_to_playlist">Add To Playlist</string>
+    <string name="successfuly_added_to_playlist">Videos successfuly added to playlist</string>
+    <string name="error_empty_playlist_name">Playlist name can not be empty</string>
+    <string name="remove_from_playlist">Remove From Playlist</string>
+    <string name="empty_playlist">Playlist is empty! Try adding some videos...</string>
+</resources>

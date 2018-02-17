@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:CircleProgressView="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
+
+    <VideoView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/video_view"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        />
+
+    <com.alirezaahmadi.videoplayer.component.VolumeControl
+        android:id="@+id/player_volume_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="#aa000000"
+        />
+
+    <at.grabner.circleprogress.CircleProgressView
+        android:id="@+id/volume_progress"
+        android:layout_width="@dimen/volume_value_size"
+        android:layout_height="@dimen/volume_value_size"
+        CircleProgressView:cpv_autoTextSize="true"
+        CircleProgressView:cpv_barColor="@color/white"
+        CircleProgressView:cpv_barWidth="20dp"
+        CircleProgressView:cpv_innerContourSize="0dp"
+        CircleProgressView:cpv_outerContourSize="0dp"
+        CircleProgressView:cpv_rimColor="#55ffffff"
+        CircleProgressView:cpv_rimWidth="20dp"
+        CircleProgressView:cpv_spinColor="@color/white"
+        CircleProgressView:cpv_textColor="@color/white"
+        CircleProgressView:cpv_textScale="0.7"
+        CircleProgressView:cpv_unitColor="@color/white"
+        CircleProgressView:cpv_maxValue="15"
+        CircleProgressView:cpv_maxValueAllowed="15"
+        CircleProgressView:cpv_value="-1"
+        CircleProgressView:cpv_textMode="Value"
+        android:layout_centerInParent="true"
+        />
+
+</RelativeLayout>

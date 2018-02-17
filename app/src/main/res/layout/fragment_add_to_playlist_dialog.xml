@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/confirm_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:background="@color/white"
+    android:layout_centerInParent="true"
+    android:padding="@dimen/space_2"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/add_to_play_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_playlist"
+        android:gravity="center"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/add_to_play_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:padding="@dimen/space_1"
+        android:clipToPadding="false"
+        />
+
+</LinearLayout>
+
+

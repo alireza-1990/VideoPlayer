@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <ImageView
+        android:id="@+id/volume_up"
+        android:layout_width="@dimen/volume_icon_size"
+        android:layout_height="@dimen/volume_icon_size"
+        android:src="@drawable/ic_volume_up_24dp"
+        android:padding="@dimen/space_1"
+        />
+
+    <ImageView
+        android:id="@+id/volume_down"
+        android:layout_width="@dimen/volume_icon_size"
+        android:layout_height="@dimen/volume_icon_size"
+        android:src="@drawable/ic_volume_down_24dp"
+        android:padding="@dimen/space_1"
+        />
+
+</merge>

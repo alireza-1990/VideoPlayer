@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:textViewStyle">@style/TextView</item>
+    </style>
+
+    <style name="TextView">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextView.VideoItemTitle">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:padding">@dimen/space_2</item>
+        <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="TextView.PlaylistItemTitle">
+        <item name="android:padding">@dimen/space_2</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+
+
+</resources>

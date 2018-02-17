@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_1"
+    android:background="@color/white"
+    >
+
+    <EditText
+        android:id="@+id/item_new_playlist_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:inputType="text"
+        android:imeOptions="actionDone"
+        android:hint="@string/add_new_playlist_hint"
+        android:padding="@dimen/space_2"
+        />
+
+</RelativeLayout>
