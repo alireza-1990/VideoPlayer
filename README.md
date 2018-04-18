@@ -11,7 +11,3 @@ This is a sample project to read video files from user's device. It also allows 
 - Room is used for database access. Room is combined with rxJava to allow reactive access to DB.
 - Mockito and Roboletric used for testing.
 
-
-### Contribution
-If you have any question contact me at `a.ahmadi.dev@gmail.com`.
-
