@@ -14,13 +14,26 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
+
+    signingConfigs {
+        debug{
+
+        }
+        release {
+
+        }
+    }
+
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
