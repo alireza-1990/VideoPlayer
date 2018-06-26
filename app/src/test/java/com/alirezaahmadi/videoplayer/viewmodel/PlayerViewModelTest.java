@@ -175,10 +175,4 @@ public class PlayerViewModelTest extends BaseTest {
         viewModel.prev();
         assertEquals(viewModel.getCurrentVideo().getValue().getId(), videoList.get(videoList.size() -1).getId());
     }
-
-    @Test
-    public void failedTest_ForJenkins(){
-        assertTrue(false);
-    }
-
 }
