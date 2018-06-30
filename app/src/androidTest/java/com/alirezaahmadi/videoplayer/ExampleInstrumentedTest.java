@@ -24,9 +24,4 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.alirezaahmadi.videoplayer", appContext.getPackageName());
     }
-
-    @Test
-    public void failed_test_for_firebase_test_lab_to_fail(){
-        assertTrue(false);
-    }
 }
