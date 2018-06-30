@@ -16,17 +16,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
         }
-        testBuildType "release"
+//        testBuildType "release"
     }
 
-    signingConfigs {
-        debug{
-
-        }
-        release {
-
-        }
-    }
+//    signingConfigs {
+//        debug{
+//
+//        }
+//        release {
+//
+//        }
+//    }
 
 
     compileOptions {
@@ -72,4 +72,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
 
 
+    androidTestImplementation 'junit:junit:4.12'
 }
