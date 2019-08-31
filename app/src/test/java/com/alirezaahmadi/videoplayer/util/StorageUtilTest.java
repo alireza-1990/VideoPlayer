@@ -21,28 +21,28 @@ import static org.mockito.Mockito.*;
 @RunWith(RobolectricTestRunner.class)
 public class StorageUtilTest {
 
-    StorageUtil storageUtil;
-    ContentResolver contentResolver;
+    private StorageUtil storageUtil;
+    private ContentResolver contentResolver;
 
-    List<Video> originalList;
+    private List<Video> originalList;
 
     @Before
     public void init(){
         contentResolver = Mockito.mock(ContentResolver.class);
         originalList = TestUtil.getVideoList();
 
-        MatrixCursor viedeoCursor = new MatrixCursor(new String[] { MediaStore.Video.VideoColumns._ID,
+        MatrixCursor videoCursor = new MatrixCursor(new String[] { MediaStore.Video.VideoColumns._ID,
                 MediaStore.Video.VideoColumns.TITLE,
                 MediaStore.Video.Media.DATA
         });
 
         for(Video video: originalList) {
-            viedeoCursor.addRow(new Object[]{video.getId(), video.getTitle(), video.getVideoPath()});
+            videoCursor.addRow(new Object[]{video.getId(), video.getTitle(), video.getVideoPath()});
         }
 
         when(contentResolver.query(eq(MediaStore.Video.Media.EXTERNAL_CONTENT_URI),
                 any(String[].class), isNull(), isNull(), isNull()))
-                .thenReturn(viedeoCursor);
+                .thenReturn(videoCursor);
 
 
         for(Video video: originalList) {
@@ -52,7 +52,7 @@ public class StorageUtilTest {
             thumbnailCursor.addRow(new Object[]{video.getId(), video.getThumbnailPath()});
 
             when(contentResolver.query(eq(MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI),
-                    any(String[].class), anyString(), eq(new String[]{String.valueOf(video.getId())}), (String) isNull()))
+                    any(String[].class), anyString(), eq(new String[]{String.valueOf(video.getId())}), isNull()))
                     .thenReturn(thumbnailCursor);
         }
 
@@ -60,8 +60,9 @@ public class StorageUtilTest {
     }
 
     @Test
-    public void getListOfVideos() throws Exception {
+    public void getAllVideos_returnsAllTheItems() throws Exception {
         List<Video> videoList = storageUtil.getAllVideos();
         TestUtil.assertEqualsLists(originalList, videoList);
     }
+
 }

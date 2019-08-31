@@ -17,6 +17,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -51,7 +52,7 @@ public class PlayerViewModelTest extends BaseTest {
         viewModel = new PlayerViewModel(videoRepository, audioManager);
 
         List<Video> originalList = TestUtil.getVideoList();
-        when(videoRepository.getVideoList()).thenReturn(Flowable.just(originalList));
+        when(videoRepository.getVideoList()).thenReturn(Observable.just(originalList));
 
         when(audioManager.getStreamMaxVolume(anyInt())).thenReturn(15);
 

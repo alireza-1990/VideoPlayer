@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -34,7 +35,7 @@ public class VideoListViewModelTest extends BaseTest {
         videoRepository = mock(VideoRepository.class);
         viewModel = new VideoListViewModel(videoRepository);
 
-        when(videoRepository.getVideoList()).thenReturn(Flowable.just(new ArrayList<>()));
+        when(videoRepository.getVideoList()).thenReturn(Observable.just(new ArrayList<>()));
     }
 
     @Test
@@ -60,7 +61,7 @@ public class VideoListViewModelTest extends BaseTest {
     @Test
     public void getDataWhenRepoIsNotEmpty() throws Exception {
         final List<Video> originalList = TestUtil.getVideoList();
-        when(videoRepository.getVideoList()).thenReturn(Flowable.just(originalList));
+        when(videoRepository.getVideoList()).thenReturn(Observable.just(originalList));
         assertEquals(viewModel.getVideoList().getValue().size(), 2);
         TestUtil.assertEqualsLists(originalList, viewModel.getVideoList().getValue());
     }
