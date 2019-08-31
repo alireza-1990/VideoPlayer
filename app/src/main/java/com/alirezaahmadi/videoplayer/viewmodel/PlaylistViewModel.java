@@ -9,13 +9,15 @@ import com.alirezaahmadi.videoplayer.repository.PlaylistRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class PlaylistViewModel extends ViewModel {
+public class PlaylistViewModel extends BaseViewModel {
     private MutableLiveData<List<Playlist>> playlists = new MutableLiveData<>();
     private PlaylistRepository repository;
     private List<Integer> videoIdsToAdd = new ArrayList<>();
@@ -35,10 +37,12 @@ public class PlaylistViewModel extends ViewModel {
 
     public LiveData<List<Playlist>> getPlaylists() {
         if(playlists.getValue() == null){
-            repository.getPlaylists()
+            Disposable disposable = repository.getPlaylists()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(videos -> playlists.setValue(videos));
+
+            addToUnsubsribed(disposable);
         }
 
         return playlists;

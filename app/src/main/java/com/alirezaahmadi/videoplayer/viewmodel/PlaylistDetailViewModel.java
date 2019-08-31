@@ -14,9 +14,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class PlaylistDetailViewModel extends ViewModel {
+public class PlaylistDetailViewModel extends BaseViewModel {
     private MutableLiveData<List<Video>> videoList = new MutableLiveData<>();
     private MutableLiveData<Integer> emptyErrorVisibility = new MutableLiveData<>();
     private MutableLiveData<String> title = new MutableLiveData<>();
@@ -61,19 +62,23 @@ public class PlaylistDetailViewModel extends ViewModel {
     }
 
     private void getVideos(){
-        videoRepository.getPlaylistVideos(playlistId)
+        Disposable disposable = videoRepository.getPlaylistVideos(playlistId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(videos -> {
                     videoList.setValue(videos);
                     emptyErrorVisibility.setValue(videos.isEmpty() ? View.VISIBLE : View.GONE);
                 });
+
+        addToUnsubsribed(disposable);
     }
 
     private void loadPlaylist() {
-        playlistRepository.getPlaylistById(playlistId)
+        Disposable disposable = playlistRepository.getPlaylistById(playlistId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(playlist -> title.setValue(playlist.getTitle()));
+
+        addToUnsubsribed(disposable);
     }
 }

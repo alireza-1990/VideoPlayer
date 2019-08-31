@@ -25,18 +25,20 @@ public class VideoRepository {
         this.playlistItemDao = playlistItemDao;
     }
 
-    public Flowable<List<Video>> getVideoList(){
-        return Flowable.fromCallable(() -> storageUtil.getAllVideos());
+    public Observable<List<Video>> getVideoList(){
+        return Observable.fromCallable(() -> storageUtil.getAllVideos());
     }
 
-    public Flowable<List<Video>> getPlaylistVideos(int playListId) {
+    public Observable<List<Video>> getPlaylistVideos(int playListId) {
         return playlistItemDao.loadPlayListItems(playListId)
+                .toObservable()
                 .flatMap(playlistItems -> {
                     String[] videoIds = new String[playlistItems.size()];
+                    //todo Change api to get Int list
                     for (int i = 0; i < playlistItems.size(); i++)
                         videoIds[i] = String.valueOf(playlistItems.get(i).getVideoId());
 
-                    return Flowable.fromCallable(() -> storageUtil.getVideosForIds(videoIds));
+                    return Observable.fromCallable(() -> storageUtil.getVideosForIds(videoIds));
                 });
     }
 }

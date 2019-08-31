@@ -13,10 +13,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class PlayerViewModel extends ViewModel {
+public class PlayerViewModel extends BaseViewModel {
 
     private MutableLiveData<List<Video>> videoList = new MutableLiveData<>();
     private MutableLiveData<Video> currentVideo = new MutableLiveData<>();
@@ -48,7 +50,6 @@ public class PlayerViewModel extends ViewModel {
             updateCurrentVideo();
     }
 
-
     public LiveData<Video> getCurrentVideo() {
         if(videoId != -1 && videoList.getValue() == null){
             loadVideos();
@@ -57,14 +58,16 @@ public class PlayerViewModel extends ViewModel {
     }
 
     private void loadVideos() {
-        Flowable<List<Video>> flowable = playlistId != -1 ? videoRepository.getPlaylistVideos(playlistId) : videoRepository.getVideoList();
+        Observable<List<Video>> observable = playlistId != -1 ? videoRepository.getPlaylistVideos(playlistId) : videoRepository.getVideoList();
 
-        flowable.subscribeOn(Schedulers.io())
+        Disposable disposable = observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(videos -> {
                 videoList.setValue(videos);
                 updateCurrentVideo();
             });
+
+        addToUnsubsribed(disposable);
     }
 
     public LiveData<Integer> getVolumeValue() {
