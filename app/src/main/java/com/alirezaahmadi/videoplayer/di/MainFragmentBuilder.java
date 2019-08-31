@@ -23,7 +23,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 @Module
-public abstract class FragmentBuilder {
+public abstract class MainFragmentBuilder {
     @ContributesAndroidInjector
     abstract VideoListFragment contributeVideoListFragment();
 

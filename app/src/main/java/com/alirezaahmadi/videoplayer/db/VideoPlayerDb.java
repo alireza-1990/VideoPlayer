@@ -30,5 +30,4 @@ import com.alirezaahmadi.videoplayer.model.PlaylistItem;
 public abstract class VideoPlayerDb extends RoomDatabase {
     abstract public PlaylistDao playlistDao();
     abstract public PlaylistItemDao playlistItemDao();
-
 }

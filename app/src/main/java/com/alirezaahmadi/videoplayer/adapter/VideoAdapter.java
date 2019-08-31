@@ -57,7 +57,7 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
         notifyDataSetChanged();
     }
 
-    public void cancelCelectionMode(){
+    public void cancelSelectionMode(){
         selectedList.clear();
         selectionMode = false;
         notifyDataSetChanged();
@@ -71,7 +71,7 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
         private ImageView thumbnailIV;
         private TextView titleTV;
 
-        public VideoHolder(View itemView) {
+        VideoHolder(View itemView) {
             super(itemView);
             thumbnailIV = itemView.findViewById(R.id.item_video_thumbnail);
             titleTV = itemView.findViewById(R.id.item_video_title);
@@ -143,7 +143,7 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
 
     private void changeSelectionState(int videoId) {
         if(selectedList.contains(videoId))
-            selectedList.remove(selectedList.indexOf(videoId));
+            selectedList.remove((Integer) videoId);
 
         else
             selectedList.add(videoId);

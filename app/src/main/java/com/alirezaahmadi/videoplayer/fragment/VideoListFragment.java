@@ -106,7 +106,7 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        adapter.cancelCelectionMode();
+        adapter.cancelSelectionMode();
     }
 
     private void showAddToPlaylistDialog() {

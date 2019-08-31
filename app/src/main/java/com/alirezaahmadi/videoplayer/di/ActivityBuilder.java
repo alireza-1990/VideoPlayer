@@ -10,7 +10,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector(modules = FragmentBuilder.class)
+    @ContributesAndroidInjector(modules = MainFragmentBuilder.class)
     abstract MainActivity bindVideoListActivity();
 
     @ContributesAndroidInjector
