@@ -1,8 +1,8 @@
 package com.alirezaahmadi.videoplayer.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class BaseActivity extends AppCompatActivity {
+abstract public class BaseActivity extends DaggerAppCompatActivity {
 
     protected void startActivityInitProcess(){
         onCreateViewInstances();

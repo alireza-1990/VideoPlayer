@@ -26,10 +26,8 @@ import dagger.android.support.HasSupportFragmentInjector;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends BaseActivity implements HasSupportFragmentInjector, EasyPermissions.PermissionCallbacks {
+public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
     private static final int RC_READ_EXTERNAL_STORAGE = 101;
-
-    @Inject DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -94,11 +92,6 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(null);
         toolbar.setTitle(R.string.app_name);
-    }
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return dispatchingAndroidInjector;
     }
 
     @Override
