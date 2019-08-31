@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alirezaahmadi.videoplayer.R;
@@ -56,7 +57,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     class NewPlaylistHolder extends RecyclerView.ViewHolder {
         private EditText inputET;
 
-        public NewPlaylistHolder(View itemView) {
+        NewPlaylistHolder(View itemView) {
             super(itemView);
             this.inputET = itemView.findViewById(R.id.item_new_playlist_input);
         }
@@ -66,7 +67,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private TextView titleTV;
         private ImageView deleteIcon;
 
-        public ItemHolder(View itemView) {
+        ItemHolder(View itemView) {
             super(itemView);
             titleTV = itemView.findViewById(R.id.item_playlist_title);
             deleteIcon = itemView.findViewById(R.id.item_playlist_delete);
@@ -74,7 +75,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType){
             case TYPE_NEW: {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_new_play_list, parent, false);
@@ -102,14 +103,12 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch (getItemViewType(position)){
-            case TYPE_ITEM:
-                ItemHolder itemHolder = (ItemHolder) holder;
-                Playlist playlist = getPlaylist(position);
-                itemHolder.titleTV.setText(playlist.getTitle());
-                itemHolder.itemView.setTag(playlist.getId());
-                itemHolder.deleteIcon.setTag(playlist.getId());
-                break;
+        if (getItemViewType(position) == TYPE_ITEM) {
+            ItemHolder itemHolder = (ItemHolder) holder;
+            Playlist playlist = getPlaylist(position);
+            itemHolder.titleTV.setText(playlist.getTitle());
+            itemHolder.itemView.setTag(playlist.getId());
+            itemHolder.deleteIcon.setTag(playlist.getId());
         }
     }
 
@@ -135,17 +134,16 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
-            String text = v.getText().toString();
+            String text = textView.getText().toString();
             if(text.trim().isEmpty())
                 Toast.makeText(application, R.string.error_empty_playlist_name, Toast.LENGTH_SHORT).show();
 
             else if(listener != null)
                 listener.onNewPlaylistAdded(text);
 
-            v.setText(null);
-
+            textView.setText(null);
             return true;
         }
         return false;
