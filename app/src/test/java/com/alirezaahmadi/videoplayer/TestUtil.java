@@ -29,7 +29,7 @@ public class TestUtil {
         return videoList;
     }
 
-    public static void assertEqualsLists(List<Video> videoList1, List<Video> videoList2){
+    public static void assertEqualsVideoLists(List<Video> videoList1, List<Video> videoList2){
         for(int i = 0; i < videoList1.size(); i++) {
             assertEquals(videoList1.get(i).getId(), videoList2.get(i).getId());
             assertEquals(videoList1.get(i).getTitle(), videoList2.get(i).getTitle());

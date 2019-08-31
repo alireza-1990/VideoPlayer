@@ -62,7 +62,7 @@ public class StorageUtilTest {
     @Test
     public void getAllVideos_returnsAllTheItems() throws Exception {
         List<Video> videoList = storageUtil.getAllVideos();
-        TestUtil.assertEqualsLists(originalList, videoList);
+        TestUtil.assertEqualsVideoLists(originalList, videoList);
     }
 
 }

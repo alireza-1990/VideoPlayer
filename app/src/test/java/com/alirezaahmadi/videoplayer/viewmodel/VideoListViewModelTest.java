@@ -15,7 +15,6 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 import static org.junit.Assert.*;
@@ -63,6 +62,6 @@ public class VideoListViewModelTest extends BaseTest {
         final List<Video> originalList = TestUtil.getVideoList();
         when(videoRepository.getVideoList()).thenReturn(Observable.just(originalList));
         assertEquals(viewModel.getVideoList().getValue().size(), 2);
-        TestUtil.assertEqualsLists(originalList, viewModel.getVideoList().getValue());
+        TestUtil.assertEqualsVideoLists(originalList, viewModel.getVideoList().getValue());
     }
 }
