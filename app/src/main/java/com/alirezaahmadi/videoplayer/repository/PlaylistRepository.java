@@ -39,7 +39,7 @@ public class PlaylistRepository {
         });
     }
 
-    public Single detelePlayList(int playlistId){
+    public Single deletePlayList(int playlistId){
         return Single.fromCallable(() -> {
             playlistDao.deletePlaylist(playlistId);
             return new Object();

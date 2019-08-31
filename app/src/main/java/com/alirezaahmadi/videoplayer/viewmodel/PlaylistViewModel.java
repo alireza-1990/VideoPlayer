@@ -2,14 +2,12 @@ package com.alirezaahmadi.videoplayer.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.alirezaahmadi.videoplayer.model.Playlist;
 import com.alirezaahmadi.videoplayer.repository.PlaylistRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import javax.inject.Inject;
 
@@ -64,7 +62,7 @@ public class PlaylistViewModel extends BaseViewModel {
     }
 
     public void deletePlayList(int playlistId){
-        repository.detelePlayList(playlistId)
+        repository.deletePlayList(playlistId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
