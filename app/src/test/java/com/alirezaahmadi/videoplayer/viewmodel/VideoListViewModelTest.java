@@ -1,6 +1,5 @@
 package com.alirezaahmadi.videoplayer.viewmodel;
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 
 import com.alirezaahmadi.videoplayer.BaseTest;
@@ -9,7 +8,6 @@ import com.alirezaahmadi.videoplayer.repository.VideoRepository;
 import com.alirezaahmadi.videoplayer.TestUtil;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -28,9 +26,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 public class VideoListViewModelTest extends BaseTest {
-    @Rule
-    public InstantTaskExecutorRule instantExecutor = new InstantTaskExecutorRule();
-
     VideoRepository videoRepository;
     VideoListViewModel viewModel;
 
