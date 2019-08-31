@@ -92,7 +92,7 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
         Video video = videoList.get(position);
         videoHolder.titleTV.setText(video.getTitle());
         if(video.getThumbnailPath() != null)
-            Picasso.with(application).load(new File(video.getThumbnailPath())).into(videoHolder.thumbnailIV);
+            Picasso.get().load(new File(video.getThumbnailPath())).into(videoHolder.thumbnailIV);
         videoHolder.itemView.setTag(video.getId());
         videoHolder.itemView.setOnLongClickListener(this);
 
