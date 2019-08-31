@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
 
     @Override
     protected void onActivityInitFinished() {
-        requestPermissionsIfNeccessary();
+        requestPermissionsIfNecessary();
     }
 
     private void initToolbar() {
@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
      * Also it gives user an option to go to settings in case he/she denied
      * the permission and clicked on don't ask again.
      */
-    private void requestPermissionsIfNeccessary(){
+    private void requestPermissionsIfNecessary(){
         String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE};
         if (EasyPermissions.hasPermissions(this, perms)) {
             viewPager.setVisibility(View.VISIBLE);
@@ -145,7 +145,7 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
-            requestPermissionsIfNeccessary();
+            requestPermissionsIfNecessary();
 
         }
     }
@@ -156,7 +156,7 @@ public class MainActivity extends BaseActivity implements HasSupportFragmentInje
         builder.setTitle(R.string.access_denied)
                 .setMessage(R.string.permission_denied_description)
                 .setPositiveButton(R.string.retry, (dialog, which) -> {
-                    requestPermissionsIfNeccessary();
+                    requestPermissionsIfNecessary();
                 })
                 .setNegativeButton(R.string.exit, (dialog, which) -> {
                     finish();
