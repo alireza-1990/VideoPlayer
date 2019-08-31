@@ -1,8 +1,6 @@
 package com.alirezaahmadi.videoplayer.repository;
 
-import com.alirezaahmadi.videoplayer.db.PlaylistDao;
 import com.alirezaahmadi.videoplayer.db.PlaylistItemDao;
-import com.alirezaahmadi.videoplayer.model.PlaylistItem;
 import com.alirezaahmadi.videoplayer.model.Video;
 import com.alirezaahmadi.videoplayer.util.StorageUtil;
 
