@@ -82,20 +82,18 @@ public class StorageUtil {
 
         Uri videoUri = MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI;
 
-        Cursor c = contentResolver.query(videoUri, projection, MediaStore.Video.Thumbnails.VIDEO_ID + "=?",
-                new String[] {Integer.toString(videoId)}, null);
+        try (Cursor cursor = contentResolver.query(videoUri, projection, MediaStore.Video.Thumbnails.VIDEO_ID + "=?",
+                new String[]{Integer.toString(videoId)}, null)) {
 
-        try {
-            if ((c != null) && c.moveToFirst()) {
-                return c.getString(c.getColumnIndexOrThrow(MediaStore.Video.Thumbnails.DATA));
+            if ((cursor != null) && cursor.moveToFirst()) {
+                return cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Thumbnails.DATA));
             }
-        } finally {
-            if(c != null) c.close();
         }
 
         return null;
     }
 
+    //todo how to test this function?!
     private String makePlaceholders(int len) {
         if (len < 1) {
             throw new RuntimeException("No placeholders");
