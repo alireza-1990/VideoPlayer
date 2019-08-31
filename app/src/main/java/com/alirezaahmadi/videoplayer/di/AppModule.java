@@ -1,21 +1,16 @@
 package com.alirezaahmadi.videoplayer.di;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
-import android.content.ContentProvider;
+import androidx.room.Room;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.media.AudioManager;
 
 import com.alirezaahmadi.videoplayer.adapter.PlaylistAdapter;
-import com.alirezaahmadi.videoplayer.adapter.VideoAdapter;
 import com.alirezaahmadi.videoplayer.db.PlaylistDao;
 import com.alirezaahmadi.videoplayer.db.PlaylistItemDao;
 import com.alirezaahmadi.videoplayer.db.VideoPlayerDb;
-import com.alirezaahmadi.videoplayer.model.Video;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

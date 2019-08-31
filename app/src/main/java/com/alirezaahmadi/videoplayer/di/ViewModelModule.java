@@ -1,7 +1,7 @@
 package com.alirezaahmadi.videoplayer.di;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.alirezaahmadi.videoplayer.viewmodel.DaggerViewModelFactory;
 import com.alirezaahmadi.videoplayer.viewmodel.PlayerViewModel;

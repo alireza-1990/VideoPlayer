@@ -1,6 +1,6 @@
 package com.alirezaahmadi.videoplayer;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;

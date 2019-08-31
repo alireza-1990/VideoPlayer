@@ -17,8 +17,8 @@
 package com.alirezaahmadi.videoplayer.db;
 
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
 import com.alirezaahmadi.videoplayer.model.Playlist;
 import com.alirezaahmadi.videoplayer.model.PlaylistItem;

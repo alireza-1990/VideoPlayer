@@ -1,7 +1,7 @@
 package com.alirezaahmadi.videoplayer.viewmodel;
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
-import android.arch.lifecycle.Observer;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.Observer;
 
 import com.alirezaahmadi.videoplayer.BaseTest;
 import com.alirezaahmadi.videoplayer.model.Video;

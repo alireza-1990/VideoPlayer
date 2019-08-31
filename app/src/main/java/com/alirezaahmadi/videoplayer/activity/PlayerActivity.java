@@ -4,14 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.MediaController;
@@ -42,7 +41,9 @@ public class PlayerActivity extends BaseActivity {
     MediaController mediaController;
 
     public static Intent createIntent(Context context, int videoId){
-        return createIntent(context, videoId, -1);
+        Intent intent = createIntent(context, videoId, -1);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
     }
 
     public static Intent createIntent(Context context, int videoId, int playlistId){

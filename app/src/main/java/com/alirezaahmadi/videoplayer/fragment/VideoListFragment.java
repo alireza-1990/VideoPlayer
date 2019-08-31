@@ -1,14 +1,14 @@
 package com.alirezaahmadi.videoplayer.fragment;
 
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alirezaahmadi.videoplayer.R;
-import com.alirezaahmadi.videoplayer.activity.PlayerActivity;
 import com.alirezaahmadi.videoplayer.adapter.VideoAdapter;
 import com.alirezaahmadi.videoplayer.util.NavigationController;
 import com.alirezaahmadi.videoplayer.viewmodel.DaggerViewModelFactory;

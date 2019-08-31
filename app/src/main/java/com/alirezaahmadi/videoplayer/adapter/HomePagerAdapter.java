@@ -1,19 +1,14 @@
 package com.alirezaahmadi.videoplayer.adapter;
 
 import android.app.Application;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.alirezaahmadi.videoplayer.R;
 import com.alirezaahmadi.videoplayer.fragment.PlayListsFragment;
 import com.alirezaahmadi.videoplayer.fragment.VideoListFragment;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
     private Application application;

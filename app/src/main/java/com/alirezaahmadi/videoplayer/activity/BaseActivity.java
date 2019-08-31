@@ -1,6 +1,6 @@
 package com.alirezaahmadi.videoplayer.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
 

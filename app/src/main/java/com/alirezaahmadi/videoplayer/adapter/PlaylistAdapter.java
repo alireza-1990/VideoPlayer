@@ -1,26 +1,24 @@
 package com.alirezaahmadi.videoplayer.adapter;
 
 import android.app.Application;
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alirezaahmadi.videoplayer.R;
 import com.alirezaahmadi.videoplayer.model.Playlist;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener, TextView.OnEditorActionListener {
     private static final int TYPE_NEW = 1;
