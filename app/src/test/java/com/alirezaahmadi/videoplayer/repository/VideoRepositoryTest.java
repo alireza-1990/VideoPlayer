@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,10 +28,10 @@ public class VideoRepositoryTest {
         storageUtil = mock(StorageUtil.class);
         mockVideoList = TestUtil.getVideoList();
         when(storageUtil.getAllVideos()).thenReturn(mockVideoList);
-        when(storageUtil.getVideosForIds(any())).thenReturn(mockVideoList);
+        when(storageUtil.getVideosForIds(new String[]{"2"})).thenReturn(mockVideoList.subList(0, 1));
 
         playlistItemDao = mock(PlaylistItemDao.class);
-
+        when(playlistItemDao.loadPlayListItems(any())).thenReturn(Flowable.just(TestUtil.getMockPlaylistItems()));
 
         videoRepository = new VideoRepository(storageUtil, playlistItemDao);
     }
@@ -40,8 +42,11 @@ public class VideoRepositoryTest {
         TestUtil.assertEqualsVideoLists(videoList, this.mockVideoList);
     }
 
+
+    //todo test not working... decide to keep or remove
     @Test
     public void getPlaylistVideos() {
+        List<Video> videoList = videoRepository.getPlaylistVideos(1).blockingFirst();
 
     }
 }
