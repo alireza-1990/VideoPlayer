@@ -1,11 +1,8 @@
 package com.alirezaahmadi.videoplayer.repository;
 
 import android.content.Context;
-import android.util.Log;
-
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
-
 import com.alirezaahmadi.videoplayer.db.PlaylistDao;
 import com.alirezaahmadi.videoplayer.db.PlaylistItemDao;
 import com.alirezaahmadi.videoplayer.db.VideoPlayerDb;
@@ -38,7 +35,7 @@ public class PlaylistRepositoryTest {
 
     @Test
     public void onInit_getPlaylists_shouldBeEmptyList() {
-        List<Playlist> playlists = playlistDao.loadAllPlayLists().blockingFirst();
+        List<Playlist> playlists = playlistRepository.getPlaylists().blockingFirst();
         assertEquals(playlists.size(), 0);
     }
 
@@ -64,19 +61,51 @@ public class PlaylistRepositoryTest {
         assertEquals(playlist.getTitle(), "Playlist one");
     }
 
+    //todo test takes forever!
     @Test
-    public void addPlaylist() {
+    public void ifPlayListDoesNotExists_getPlaylistById_returnsNull(){
+        Playlist playlist = playlistRepository.getPlaylistById(1).blockingFirst();
+        assertNull(playlist);
     }
 
     @Test
-    public void deletePlayList() {
+    public void addPlaylist_addsThePlaylistToTheDb() {
+        Playlist playlist = new Playlist("Playlist one");
+        playlistRepository.addPlaylist(playlist);
+
+        List<Playlist> playlists = playlistDao.loadAllPlayLists().blockingFirst();
+        assertEquals(playlists.size(), 1);
+        assertEquals(playlists.get(0).getTitle(), "Playlist one");
     }
 
     @Test
-    public void addVideoToPlayList() {
+    public void deletePlayList_removesThePlaylistFromDb() {
+        playlistDao.insertPlaylist(new Playlist("Playlist one"));
+        playlistDao.insertPlaylist(new Playlist("Playlist two"));
+        playlistDao.insertPlaylist(new Playlist("Playlist three"));
+
+        playlistRepository.deletePlayList(2).blockingGet();
+
+        List<Playlist> playlists = playlistDao.loadAllPlayLists().blockingFirst();
+        assertEquals(2, playlists.size());
+        assertEquals(playlists.get(0).getTitle(), "Playlist three");
+        assertEquals(playlists.get(1).getTitle(), "Playlist one");
     }
 
-    @Test
-    public void deleteVideosFromPlayList() {
-    }
+    //todo dell
+//    @Test
+//    public void onCreation_playlistHasNoVideo(){
+//        Playlist playlist = new Playlist("Playlist one");
+//        playlistDao.insertPlaylist(playlist);
+//
+//    }
+//
+//    @Test
+//    public void addVideoToPlayList() {
+//    }
+//
+//    @Test
+//    public void deleteVideosFromPlayList() {
+//    }
+
 }
