@@ -15,7 +15,6 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 
-import static com.google.common.base.Verify.verify;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -31,6 +30,7 @@ public class PlaylistRepositoryTest extends BaseTest {
 
     @Before
     public void init(){
+
         mockPlaylists = TestUtil.getMockPlaylists();
         playlistDao = mock(PlaylistDao.class);
         when(playlistDao.loadAllPlayLists()).thenReturn(Flowable.just(mockPlaylists));
