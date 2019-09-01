@@ -16,12 +16,10 @@ import io.reactivex.Single;
 
 public class PlaylistRepository {
     private PlaylistDao playlistDao;
-    private PlaylistItemDao playlistItemDao;
 
     @Inject
-    public PlaylistRepository(PlaylistDao playlistDao, PlaylistItemDao playlistItemDao) {
+    public PlaylistRepository(PlaylistDao playlistDao) {
         this.playlistDao = playlistDao;
-        this.playlistItemDao = playlistItemDao;
     }
 
     public Flowable<List<Playlist>> getPlaylists(){
@@ -42,32 +40,6 @@ public class PlaylistRepository {
     public Single deletePlayList(int playlistId){
         return Single.fromCallable(() -> {
             playlistDao.deletePlaylist(playlistId);
-            return new Object();
-        });
-    }
-
-    public Single addVideoToPlayList(List<Integer> videoIds, int playListId){
-        return Single.fromCallable(() -> {
-            List<PlaylistItem> playlistItems = new ArrayList<>();
-
-            for(int id: videoIds){
-                PlaylistItem item = new PlaylistItem();
-                item.setVideoId(id);
-                item.setPlaylistId(playListId);
-                playlistItems.add(item);
-            }
-
-            playlistItemDao.insertPlaylistItems(playlistItems);
-            return new Object();
-        });
-    }
-
-    public Single deleteVideosFromPlayList(List<Integer> videoIds, int playListId){
-        return Single.fromCallable(() -> {
-            for(int id: videoIds){
-                playlistItemDao.deleteItemsFromPlaylist(id, playListId);
-            }
-
             return new Object();
         });
     }

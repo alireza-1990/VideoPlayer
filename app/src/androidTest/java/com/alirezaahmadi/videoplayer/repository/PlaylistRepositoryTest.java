@@ -19,7 +19,6 @@ public class PlaylistRepositoryTest {
 
     private VideoPlayerDb db;
     private PlaylistDao playlistDao;
-    private PlaylistItemDao playlistItemDao;
 
     private PlaylistRepository playlistRepository;
 
@@ -28,9 +27,8 @@ public class PlaylistRepositoryTest {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, VideoPlayerDb.class).build();
         playlistDao = db.playlistDao();
-        playlistItemDao = db.playlistItemDao();
 
-        playlistRepository = new PlaylistRepository(playlistDao, playlistItemDao);
+        playlistRepository = new PlaylistRepository(playlistDao);
     }
 
     @Test

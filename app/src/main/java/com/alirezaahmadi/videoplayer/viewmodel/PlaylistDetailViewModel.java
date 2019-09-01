@@ -2,10 +2,11 @@ package com.alirezaahmadi.videoplayer.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+
 import android.view.View;
 
 import com.alirezaahmadi.videoplayer.model.Video;
+import com.alirezaahmadi.videoplayer.repository.PlaylistItemRepository;
 import com.alirezaahmadi.videoplayer.repository.PlaylistRepository;
 import com.alirezaahmadi.videoplayer.repository.VideoRepository;
 
@@ -24,12 +25,14 @@ public class PlaylistDetailViewModel extends BaseViewModel {
 
     private VideoRepository videoRepository;
     private PlaylistRepository playlistRepository;
+    private PlaylistItemRepository playlistItemRepository;
     private int playlistId = -1;
 
     @Inject
-    public PlaylistDetailViewModel(VideoRepository videoRepository, PlaylistRepository playlistRepository) {
+    public PlaylistDetailViewModel(VideoRepository videoRepository, PlaylistRepository playlistRepository, PlaylistItemRepository playlistItemRepository) {
         this.videoRepository = videoRepository;
         this.playlistRepository = playlistRepository;
+        this.playlistItemRepository = playlistItemRepository;
     }
 
     public LiveData<List<Video>> getVideoList() {
@@ -55,7 +58,7 @@ public class PlaylistDetailViewModel extends BaseViewModel {
     }
 
     public void deleteVideos(List<Integer> videoIds){
-        playlistRepository.deleteVideosFromPlayList(videoIds, playlistId)
+        playlistItemRepository.deleteVideosFromPlayList(videoIds, playlistId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
