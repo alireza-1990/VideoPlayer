@@ -17,7 +17,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
      * Stores fragment reference so activity can latter on call fragment methods
      * when necessary.
      */
-    private VideoListFragment videoListFragment;
+    private VideoListFragment videoListFragment; //todo is this a memory leak? go throw videomodel itself?
 
     public HomePagerAdapter(Application application, FragmentManager fm) {
         super(fm);

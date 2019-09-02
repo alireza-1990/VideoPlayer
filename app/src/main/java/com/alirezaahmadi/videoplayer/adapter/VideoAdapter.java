@@ -20,22 +20,22 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+//todo add DiffUtil
 public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickListener, View.OnLongClickListener {
 
     public interface VideoClickListener {
         void onVideoClicked(int videoId);
     }
 
-    public interface SelectionModeListener {
-        void onSelectionModeChanged(boolean selectionState);
+    public interface VideoLongClickListener {
+        void onVideoLongClick(int videoId);
     }
 
     private Application application;
     private List<Video> videoList;
     private List<Integer> selectedList;
     private VideoClickListener videoClickListener;
-    private SelectionModeListener selectionModeListener;
-    private boolean selectionMode = false;
+    private VideoLongClickListener videoLongClickListener;
 
     @Inject
     public VideoAdapter(Application application) {
@@ -48,8 +48,8 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
         this.videoClickListener = videoClickListener;
     }
 
-    public void setSelectionModeListener(SelectionModeListener selectionModeListener) {
-        this.selectionModeListener = selectionModeListener;
+    public void setVideoLongClickListener(VideoLongClickListener videoLongClickListener) {
+        this.videoLongClickListener = videoLongClickListener;
     }
 
     public void setVideoList(List<Video> videoList) {
@@ -57,9 +57,12 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
         notifyDataSetChanged();
     }
 
+    public void setSelectedList(List<Integer> selectedList) {
+        this.selectedList = selectedList;
+        notifyDataSetChanged();
+    }
+
     public void cancelSelectionMode(){
-        selectedList.clear();
-        selectionMode = false;
         notifyDataSetChanged();
     }
 
@@ -108,19 +111,11 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
     @Override
     public boolean onLongClick(View v) {
         int videoId = (int) v.getTag();
-        selectedList.add(videoId);
 
-        if(!selectionMode){
-            selectionMode = true;
+        if(videoLongClickListener != null)
+            videoLongClickListener.onVideoLongClick(videoId);
 
-            if(selectionModeListener != null)
-                selectionModeListener.onSelectionModeChanged(true);
-
-        }
-
-        notifyDataSetChanged();
-
-        return false;
+        return true;
     }
 
     @Override
@@ -132,23 +127,8 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
     public void onClick(View v) {
         int videoId = (int) v.getTag();
 
-        if(selectionMode){
-            changeSelectionState(videoId);
-            return;
-        }
-
         if(videoClickListener != null)
             videoClickListener.onVideoClicked(videoId);
-    }
-
-    private void changeSelectionState(int videoId) {
-        if(selectedList.contains(videoId))
-            selectedList.remove((Integer) videoId);
-
-        else
-            selectedList.add(videoId);
-
-        notifyDataSetChanged();
     }
 
 }

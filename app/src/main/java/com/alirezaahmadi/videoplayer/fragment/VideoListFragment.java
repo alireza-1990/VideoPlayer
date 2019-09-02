@@ -27,17 +27,17 @@ import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
 
-public class VideoListFragment extends Fragment implements VideoAdapter.VideoClickListener, ActionMode.Callback, VideoAdapter.SelectionModeListener, DialogDismissListener {
+public class VideoListFragment extends Fragment implements VideoAdapter.VideoClickListener, ActionMode.Callback, DialogDismissListener, VideoAdapter.VideoLongClickListener {
 
     @Inject DaggerViewModelFactory viewModelFactory;
     @Inject VideoAdapter adapter;
     @Inject NavigationController navigationController;
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
-    VideoListViewModel viewModel;
-    LinearLayoutManager layoutManager;
-    ActionMode actionMode;
+    private VideoListViewModel viewModel;
+    private LinearLayoutManager layoutManager;
+    private ActionMode actionMode;
 
     public static VideoListFragment newInstance(){
         return new VideoListFragment();
@@ -62,22 +62,26 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
 
         viewModel.getVideoList().observe(this, videos -> adapter.setVideoList(videos));
 
+        viewModel.getSelectionMode().observe(this, selectionState -> {
+            if(selectionState)
+                actionMode = getActivity().startActionMode(this);
+        });
+
+        viewModel.getSelectedVideoIds().observe(this, selectedVideosIds ->
+                adapter.setSelectedList(selectedVideosIds));
+
         adapter.setVideoClickListener(this);
-        adapter.setSelectionModeListener(this);
+        adapter.setVideoLongClickListener(this);
 
         return view;
     }
 
     @Override
     public void onVideoClicked(int videoId) {
-        navigationController.navigateToPlayer(videoId);
-    }
-
-    @Override
-    public void onSelectionModeChanged(boolean selectionState) {
-        if(selectionState)
-            actionMode = getActivity().startActionMode(this);
-
+        if(viewModel.getSelectionMode().getValue())
+            viewModel.changeVideoSelectionState(videoId);
+        else
+            navigationController.navigateToPlayer(videoId);
     }
 
     @Override
@@ -122,5 +126,10 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
     @Override
     public void onDialogDismissed() {
         closeActionMode();
+    }
+
+    @Override
+    public void onVideoLongClick(int videoId) {
+        viewModel.changeVideoSelectionState(videoId);
     }
 }

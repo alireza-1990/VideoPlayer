@@ -24,7 +24,7 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
-public class PlayListDetailActivity extends BaseActivity implements VideoAdapter.VideoClickListener, VideoAdapter.SelectionModeListener , ActionMode.Callback {
+public class PlayListDetailActivity extends BaseActivity implements VideoAdapter.VideoClickListener , ActionMode.Callback {
     private static final String ARG_PLAYLIST_ID = "playlist_id";
 
     @Inject DaggerViewModelFactory viewModelFactory;
@@ -83,8 +83,6 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
         recyclerView.setLayoutManager(layoutManager);
 
         adapter.setVideoClickListener(this);
-        adapter.setSelectionModeListener(this);
-        adapter.setSelectionModeListener(this);
 
         initToolbar();
     }
@@ -127,9 +125,9 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
         navigationController.navigateToPlayer(videoId, viewModel.getPlaylistId());
     }
 
-    @Override
-    public void onSelectionModeChanged(boolean selectionState) {
-        if (selectionState)
-            actionMode = startActionMode(this);
-    }
+//    @Override
+//    public void onSelectionModeChanged(boolean selectionState) {
+//        if (selectionState)
+//            actionMode = startActionMode(this);
+//    }
 }
