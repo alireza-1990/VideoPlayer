@@ -27,11 +27,9 @@ public class VideoListViewModel extends BaseViewModel {
     public VideoListViewModel(VideoRepository videoRepository) {
         this.videoRepository = videoRepository;
 
-        videoList.setValue(new ArrayList<>());
         selectedVideoIds.setValue(new ArrayList<>());
         selectionMode.setValue(false);
 
-        updateData();
     }
 
     private void updateData(){
@@ -44,6 +42,9 @@ public class VideoListViewModel extends BaseViewModel {
     }
 
     public LiveData<List<Video>> getVideoList() {
+        if(videoList.getValue() == null)
+            updateData();
+
         return videoList;
     }
 

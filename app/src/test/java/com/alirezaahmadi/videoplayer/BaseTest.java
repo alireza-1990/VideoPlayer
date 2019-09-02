@@ -1,9 +1,12 @@
 package com.alirezaahmadi.videoplayer;
 
 import androidx.annotation.NonNull;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.rules.TestRule;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +18,10 @@ import io.reactivex.plugins.RxJavaPlugins;
 
 @Ignore
 public class BaseTest {
+
+    @Rule
+    public TestRule rule = new InstantTaskExecutorRule();
+
     @BeforeClass
     public static void setUpBaseClass() {
         Scheduler immediate = new Scheduler() {
@@ -37,3 +44,4 @@ public class BaseTest {
         RxAndroidPlugins.setInitMainThreadSchedulerHandler(scheduler -> immediate);
     }
 }
+

@@ -24,8 +24,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+//todo update the test cases
+
 @RunWith(RobolectricTestRunner.class)
-public class VideoListViewModelTest extends BaseTest {
+public class VideoListViewModelTest  {
     VideoRepository videoRepository;
     VideoListViewModel viewModel;
 
@@ -34,6 +36,7 @@ public class VideoListViewModelTest extends BaseTest {
         videoRepository = mock(VideoRepository.class);
         viewModel = new VideoListViewModel(videoRepository);
 
+        //todo return list with actual data
         when(videoRepository.getVideoList()).thenReturn(Observable.just(new ArrayList<>()));
     }
 
