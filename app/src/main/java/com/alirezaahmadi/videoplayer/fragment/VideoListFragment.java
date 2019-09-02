@@ -47,7 +47,9 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
     public void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidSupportInjection.inject(this);
         super.onCreate(savedInstanceState);
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(VideoListViewModel.class);
+
+        //todo change template design pattern
+        viewModel = ViewModelProviders.of(getActivity(), viewModelFactory).get(VideoListViewModel.class);
     }
 
     @Override
@@ -65,6 +67,10 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
         viewModel.getSelectionMode().observe(this, selectionState -> {
             if(selectionState && actionMode == null)
                 actionMode = getActivity().startActionMode(this);
+
+            else if(!selectionState)
+                closeActionMode();
+
         });
 
         viewModel.getSelectedVideoIds().observe(this, selectedVideosIds ->

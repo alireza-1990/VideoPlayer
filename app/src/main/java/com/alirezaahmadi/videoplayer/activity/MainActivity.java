@@ -3,6 +3,7 @@ package com.alirezaahmadi.videoplayer.activity;
 import android.Manifest;
 import android.content.Intent;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AlertDialog;
 import android.os.Bundle;
@@ -12,9 +13,13 @@ import android.view.View;
 import com.alirezaahmadi.videoplayer.R;
 import com.alirezaahmadi.videoplayer.adapter.HomePagerAdapter;
 import com.alirezaahmadi.videoplayer.fragment.VideoListFragment;
+import com.alirezaahmadi.videoplayer.viewmodel.DaggerViewModelFactory;
+import com.alirezaahmadi.videoplayer.viewmodel.VideoListViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -23,15 +28,20 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
     private static final int RC_READ_EXTERNAL_STORAGE = 101;
 
-    TabLayout tabLayout;
-    ViewPager viewPager;
-    Toolbar toolbar;
+    @Inject DaggerViewModelFactory viewModelFactory;
 
-    HomePagerAdapter adapter;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private Toolbar toolbar;
+
+    private HomePagerAdapter adapter;
+    private VideoListViewModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(VideoListViewModel.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startActivityInitProcess();
@@ -59,10 +69,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
             @Override
             public void onPageSelected(int position) {
-                //hide context menu when switching between tabs
-                VideoListFragment fragment = adapter.getVideoListFragment();
-                if(fragment != null)
-                    fragment.closeActionMode();
+                viewModel.turnOffSelectionMode();
             }
 
             @Override

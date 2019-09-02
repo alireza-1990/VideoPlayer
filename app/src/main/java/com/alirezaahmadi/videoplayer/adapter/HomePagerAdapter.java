@@ -13,12 +13,6 @@ import com.alirezaahmadi.videoplayer.fragment.VideoListFragment;
 public class HomePagerAdapter extends FragmentPagerAdapter {
     private Application application;
 
-    /**
-     * Stores fragment reference so activity can latter on call fragment methods
-     * when necessary.
-     */
-    private VideoListFragment videoListFragment; //todo is this a memory leak?
-
     public HomePagerAdapter(Application application, FragmentManager fm) {
         super(fm);
         this.application = application;
@@ -28,8 +22,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                videoListFragment = VideoListFragment.newInstance();
-                return videoListFragment;
+                return VideoListFragment.newInstance();
 
             case 1:
                 return PlayListsFragment.newInstance();
@@ -59,7 +52,4 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
         return 2;
     }
 
-    public VideoListFragment getVideoListFragment(){
-        return videoListFragment;
-    }
 }
