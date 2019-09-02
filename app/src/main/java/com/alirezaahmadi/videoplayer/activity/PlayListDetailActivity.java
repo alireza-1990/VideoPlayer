@@ -24,7 +24,7 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
-public class PlayListDetailActivity extends BaseActivity implements VideoAdapter.VideoClickListener , ActionMode.Callback {
+public class PlayListDetailActivity extends BaseActivity implements VideoAdapter.VideoClickListener, ActionMode.Callback, VideoAdapter.VideoLongClickListener {
     private static final String ARG_PLAYLIST_ID = "playlist_id";
 
     @Inject DaggerViewModelFactory viewModelFactory;
@@ -73,6 +73,15 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
         viewModel.getVideoList().observe(this, videos -> adapter.setVideoList(videos));
         viewModel.getTitle().observe(this, title -> toolbar.setTitle(title));
         viewModel.getEmptyErrorVisibility().observe(this, visibility -> emptyError.setVisibility(visibility));
+
+        viewModel.getSelectionMode().observe(this, selectionState -> {
+            if(selectionState && actionMode == null)
+                actionMode = startActionMode(this);
+        });
+
+        viewModel.getSelectedVideoIds().observe(this, selectedVideosIds ->
+                adapter.setSelectedList(selectedVideosIds));
+
     }
 
     @Override
@@ -83,6 +92,7 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
         recyclerView.setLayoutManager(layoutManager);
 
         adapter.setVideoClickListener(this);
+        adapter.setVideoLongClickListener(this);
 
         initToolbar();
     }
@@ -117,19 +127,21 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-//        adapter.cancelSelectionMode();
-        //todo call viewmodel isntead
-
+        viewModel.turnOffSelectionMode();
+        actionMode = null;
     }
 
     @Override
     public void onVideoClicked(int videoId) {
-        navigationController.navigateToPlayer(videoId, viewModel.getPlaylistId());
+        if(viewModel.getSelectionMode().getValue())
+            viewModel.changeVideoSelectionState(videoId);
+        else
+            navigationController.navigateToPlayer(videoId, viewModel.getPlaylistId());
+
     }
 
-//    @Override
-//    public void onSelectionModeChanged(boolean selectionState) {
-//        if (selectionState)
-//            actionMode = startActionMode(this);
-//    }
+    @Override
+    public void onVideoLongClick(int videoId) {
+        viewModel.changeVideoSelectionState(videoId);
+    }
 }

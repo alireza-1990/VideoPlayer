@@ -18,7 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class PlaylistDetailViewModel extends BaseViewModel {
+public class PlaylistDetailViewModel extends BaseVideoListViewModel {
     private MutableLiveData<List<Video>> videoList = new MutableLiveData<>();
     private MutableLiveData<Integer> emptyErrorVisibility = new MutableLiveData<>();
     private MutableLiveData<String> title = new MutableLiveData<>();
@@ -62,6 +62,8 @@ public class PlaylistDetailViewModel extends BaseViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
+
+        turnOffSelectionMode();
     }
 
     private void getVideos(){
