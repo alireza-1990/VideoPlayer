@@ -75,4 +75,5 @@ public class VideoListViewModel extends BaseViewModel {
         selectedVideoIds.getValue().clear();
         selectedVideoIds.setValue(selectedVideoIds.getValue());
     }
+
 }
