@@ -62,10 +62,6 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
         notifyDataSetChanged();
     }
 
-    public List<Integer> getSelectedList() {
-        return selectedList;
-    }
-
     private class VideoHolder extends RecyclerView.ViewHolder {
         private ImageView thumbnailIV;
         private TextView titleTV;

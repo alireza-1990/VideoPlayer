@@ -123,7 +123,7 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
     }
 
     private void showAddToPlaylistDialog() {
-        AddToPlaylistDialogFragment fragment = AddToPlaylistDialogFragment.newInstance(adapter.getSelectedList());
+        AddToPlaylistDialogFragment fragment = AddToPlaylistDialogFragment.newInstance(viewModel.getSelectedVideoIds().getValue());
         fragment.show(getChildFragmentManager(), "addPlaylistDialog");
     }
 

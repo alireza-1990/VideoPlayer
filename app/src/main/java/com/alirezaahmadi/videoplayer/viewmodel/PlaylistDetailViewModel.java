@@ -57,13 +57,15 @@ public class PlaylistDetailViewModel extends BaseVideoListViewModel {
         return playlistId;
     }
 
-    public void deleteVideos(List<Integer> videoIds){
-        playlistItemRepository.deleteVideosFromPlayList(videoIds, playlistId)
+    @SuppressWarnings("unchecked")
+    public void deleteSelectedVideos(){
+        Disposable disposable = playlistItemRepository.deleteVideosFromPlayList(getSelectedVideoIds().getValue(), playlistId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+                .subscribe(object -> turnOffSelectionMode());
 
-        turnOffSelectionMode();
+        addToUnsubsribed(disposable);
+
     }
 
     private void getVideos(){

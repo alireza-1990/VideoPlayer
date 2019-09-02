@@ -107,7 +107,7 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         if(item.getItemId() == R.id.delete_from_playlist) {
-            viewModel.deleteVideos(adapter.getSelectedList());
+            viewModel.deleteSelectedVideos();
             return true;
         }
         return false;
