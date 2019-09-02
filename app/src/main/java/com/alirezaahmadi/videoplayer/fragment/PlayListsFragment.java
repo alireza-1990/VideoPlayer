@@ -31,7 +31,6 @@ public class PlayListsFragment extends Fragment implements PlaylistAdapter.Playl
     @Inject NavigationController navigationController;
 
     private RecyclerView recyclerView;
-
     private PlaylistViewModel viewModel;
     private RecyclerView.LayoutManager layoutManager;
 
