@@ -28,7 +28,6 @@ public class NavigationController {
 
     public void navigateToPlaylistDetail(int playlistId){
         Intent intent = PlayListDetailActivity.createIntent(application,  playlistId);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         application.startActivity(intent);
     }
 

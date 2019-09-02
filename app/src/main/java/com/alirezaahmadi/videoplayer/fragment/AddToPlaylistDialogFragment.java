@@ -34,10 +34,9 @@ public class AddToPlaylistDialogFragment extends DialogFragment implements Playl
     @Inject DaggerViewModelFactory viewModelFactory;
     @Inject @Named("withoutDelete") PlaylistAdapter adapter;
 
-    RecyclerView recyclerView;
-
-    PlaylistViewModel viewModel;
-    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerView;
+    private PlaylistViewModel viewModel;
+    private RecyclerView.LayoutManager layoutManager;
 
     public static AddToPlaylistDialogFragment newInstance(List<Integer> videoIds){
         AddToPlaylistDialogFragment fragment = new AddToPlaylistDialogFragment();

@@ -72,8 +72,15 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             titleTV = itemView.findViewById(R.id.item_playlist_title);
             deleteIcon = itemView.findViewById(R.id.item_playlist_delete);
         }
+
+        void bind(Playlist playlist){
+            titleTV.setText(playlist.getTitle());
+            itemView.setTag(playlist.getId());
+            deleteIcon.setTag(playlist.getId());
+        }
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType){
@@ -102,13 +109,11 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_ITEM) {
             ItemHolder itemHolder = (ItemHolder) holder;
             Playlist playlist = getPlaylist(position);
-            itemHolder.titleTV.setText(playlist.getTitle());
-            itemHolder.itemView.setTag(playlist.getId());
-            itemHolder.deleteIcon.setTag(playlist.getId());
+            itemHolder.bind(playlist);
         }
     }
 

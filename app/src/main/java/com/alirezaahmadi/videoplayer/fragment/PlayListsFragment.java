@@ -30,10 +30,10 @@ public class PlayListsFragment extends Fragment implements PlaylistAdapter.Playl
     @Inject @Named("withDelete") PlaylistAdapter adapter;
     @Inject NavigationController navigationController;
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
-    PlaylistViewModel viewModel;
-    RecyclerView.LayoutManager layoutManager;
+    private PlaylistViewModel viewModel;
+    private RecyclerView.LayoutManager layoutManager;
 
     public static PlayListsFragment newInstance() {
         return new PlayListsFragment();
@@ -56,7 +56,7 @@ public class PlayListsFragment extends Fragment implements PlaylistAdapter.Playl
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setNestedScrollingEnabled(false); //todo know why?
 
         viewModel.getPlaylists().observe(this, playlists -> adapter.setPlaylists(playlists));
         adapter.setListener(this);

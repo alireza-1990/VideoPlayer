@@ -41,6 +41,7 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
 
     public static Intent createIntent(Context context, int playerId){
         Intent intent = new Intent(context, PlayListDetailActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(ARG_PLAYLIST_ID, playerId);
         return intent;
     }
