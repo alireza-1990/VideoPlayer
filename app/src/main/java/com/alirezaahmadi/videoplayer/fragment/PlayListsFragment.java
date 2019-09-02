@@ -3,6 +3,7 @@ package com.alirezaahmadi.videoplayer.fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alirezaahmadi.videoplayer.R;
+import com.alirezaahmadi.videoplayer.activity.PlayListDetailActivity;
 import com.alirezaahmadi.videoplayer.adapter.PlaylistAdapter;
-import com.alirezaahmadi.videoplayer.util.NavigationController;
 import com.alirezaahmadi.videoplayer.viewmodel.DaggerViewModelFactory;
 import com.alirezaahmadi.videoplayer.viewmodel.PlaylistViewModel;
 
@@ -28,7 +29,6 @@ public class PlayListsFragment extends Fragment implements PlaylistAdapter.Playl
 
     @Inject DaggerViewModelFactory viewModelFactory;
     @Inject @Named("withDelete") PlaylistAdapter adapter;
-    @Inject NavigationController navigationController;
 
     private RecyclerView recyclerView;
     private PlaylistViewModel viewModel;
@@ -70,7 +70,8 @@ public class PlayListsFragment extends Fragment implements PlaylistAdapter.Playl
 
     @Override
     public void onItemClicked(int playlistId) {
-        navigationController.navigateToPlaylistDetail(playlistId);
+        Intent intent = PlayListDetailActivity.createIntent(getActivity(),  playlistId);
+        startActivity(intent);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.alirezaahmadi.videoplayer.fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,8 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alirezaahmadi.videoplayer.R;
+import com.alirezaahmadi.videoplayer.activity.PlayerActivity;
 import com.alirezaahmadi.videoplayer.adapter.VideoAdapter;
-import com.alirezaahmadi.videoplayer.util.NavigationController;
 import com.alirezaahmadi.videoplayer.viewmodel.DaggerViewModelFactory;
 import com.alirezaahmadi.videoplayer.viewmodel.VideoListViewModel;
 
@@ -31,7 +32,6 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
 
     @Inject DaggerViewModelFactory viewModelFactory;
     @Inject VideoAdapter adapter;
-    @Inject NavigationController navigationController;
 
     private RecyclerView recyclerView;
 
@@ -86,8 +86,10 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
     public void onVideoClicked(int videoId) {
         if(viewModel.getSelectionMode().getValue())
             viewModel.changeVideoSelectionState(videoId);
-        else
-            navigationController.navigateToPlayer(videoId);
+        else {
+            Intent intent = PlayerActivity.createIntent(getActivity(), videoId);
+            startActivity(intent);
+        }
     }
 
     @Override

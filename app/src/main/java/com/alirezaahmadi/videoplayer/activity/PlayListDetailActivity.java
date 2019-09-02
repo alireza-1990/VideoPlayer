@@ -16,7 +16,6 @@ import android.view.View;
 
 import com.alirezaahmadi.videoplayer.R;
 import com.alirezaahmadi.videoplayer.adapter.VideoAdapter;
-import com.alirezaahmadi.videoplayer.util.NavigationController;
 import com.alirezaahmadi.videoplayer.viewmodel.DaggerViewModelFactory;
 import com.alirezaahmadi.videoplayer.viewmodel.PlaylistDetailViewModel;
 
@@ -29,7 +28,6 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
 
     @Inject DaggerViewModelFactory viewModelFactory;
     @Inject VideoAdapter adapter;
-    @Inject NavigationController navigationController;
 
     RecyclerView recyclerView;
     Toolbar toolbar;
@@ -123,11 +121,14 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
 
     @Override
     public void onVideoClicked(int videoId) {
-        if(viewModel.getSelectionMode().getValue())
+        if(viewModel.getSelectionMode().getValue()) {
             viewModel.changeVideoSelectionState(videoId);
-        else
-            navigationController.navigateToPlayer(videoId, viewModel.getPlaylistId());
 
+        } else {
+            Intent intent = PlayerActivity.createIntent(this, videoId, viewModel.getPlaylistId());
+            startActivity(intent);
+
+        }
     }
 
     @Override
