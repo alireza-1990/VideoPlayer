@@ -51,18 +51,12 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist_detail);
-        startActivityInitProcess();
-    }
 
-    @Override
-    protected void onCreateViewInstances() {
         recyclerView = findViewById(R.id.play_list_detail_recycler_view);
         toolbar = findViewById(R.id.playlist_detail_toolbar);
         emptyError = findViewById(R.id.play_list_detail_empty_error);
-    }
 
-    @Override
-    protected void onBindViewModel() {
+
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlaylistDetailViewModel.class);
 
         if(getIntent().getExtras() == null || !getIntent().getExtras().containsKey(ARG_PLAYLIST_ID))
@@ -82,10 +76,7 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
         viewModel.getSelectedVideoIds().observe(this, selectedVideosIds ->
                 adapter.setSelectedList(selectedVideosIds));
 
-    }
 
-    @Override
-    protected void onViewInit() {
         layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setAdapter(adapter);
@@ -95,6 +86,7 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
         adapter.setVideoLongClickListener(this);
 
         initToolbar();
+
     }
 
     private void initToolbar() {

@@ -60,18 +60,11 @@ public class PlayerActivity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_player);
-        startActivityInitProcess();
-    }
 
-    @Override
-    protected void onCreateViewInstances() {
         volumeControl = findViewById(R.id.player_volume_control);
         videoView  = findViewById(R.id.video_view);
         volumeProgress  = findViewById(R.id.volume_progress);
-    }
 
-    @Override
-    protected void onBindViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlayerViewModel.class);
         if(!getIntent().hasExtra(ARG_VIDEO_ID)){
             throw new IllegalStateException("Video id is required");
@@ -83,13 +76,11 @@ public class PlayerActivity extends BaseActivity {
         viewModel.init(videoId, playlistId);
         viewModel.getCurrentVideo().observe(this, this::playVideo);
         viewModel.getVolumeValue().observe(this, value -> updateVolumeProgress(value));
-    }
 
-    @Override
-    protected void onViewInit() {
         volumeControl.setUpClickListener(v -> viewModel.volumeUp());
         volumeControl.setDownClickListener(v -> viewModel.volumeDown());
         volumeProgress.setAlpha(0);
+
         initVideoView();
     }
 

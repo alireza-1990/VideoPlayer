@@ -44,18 +44,11 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(VideoListViewModel.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivityInitProcess();
-    }
 
-    @Override
-    protected void onCreateViewInstances() {
         tabLayout = findViewById(R.id.main_tab_layout);
         viewPager = findViewById(R.id.main_view_pager);
         toolbar = findViewById(R.id.main_toolbar);
-    }
 
-    @Override
-    protected void onViewInit() {
         adapter = new HomePagerAdapter(getApplication(), getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setVisibility(View.GONE);
@@ -79,10 +72,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         });
 
         initToolbar();
-    }
 
-    @Override
-    protected void onActivityInitFinished() {
         requestPermissionsIfNecessary();
     }
 
