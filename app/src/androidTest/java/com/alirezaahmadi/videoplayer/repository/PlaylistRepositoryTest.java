@@ -90,20 +90,4 @@ public class PlaylistRepositoryTest {
         assertEquals(playlists.get(1).getTitle(), "Playlist one");
     }
 
-    //todo dell
-//    @Test
-//    public void onCreation_playlistHasNoVideo(){
-//        Playlist playlist = new Playlist("Playlist one");
-//        playlistDao.insertPlaylist(playlist);
-//
-//    }
-//
-//    @Test
-//    public void addVideoToPlayList() {
-//    }
-//
-//    @Test
-//    public void deleteVideosFromPlayList() {
-//    }
-
 }
