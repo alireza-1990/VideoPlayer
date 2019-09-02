@@ -43,9 +43,4 @@ public class VideoRepositoryTest {
         TestUtil.assertEqualsVideoLists(videoList, this.mockVideoList);
     }
 
-    @Test
-    public void getPlaylistVideos() {
-        List<Video> videoList = videoRepository.getPlaylistVideos(1).blockingFirst();
-
-    }
 }
