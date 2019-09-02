@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Numbrs Video Player</string>
+    <string name="app_name">Video Player</string>
     <string name="volume_up">+</string>
     <string name="volume_down">-</string>
 

@@ -1,4 +1,4 @@
-## Numbrs Video Player
+## Video Player
 
 ### About Project
 This is a sample project to read video files from user's device. It also allows user to create and manage playlists.
