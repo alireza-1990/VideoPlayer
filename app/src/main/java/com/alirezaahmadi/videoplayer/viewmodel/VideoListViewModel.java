@@ -17,22 +17,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class VideoListViewModel extends BaseViewModel {
+public class VideoListViewModel extends BaseVideoListViewModel {
     private VideoRepository videoRepository;
     private MutableLiveData<List<Video>> videoList = new MutableLiveData<>();
-    private MutableLiveData<List<Integer>> selectedVideoIds = new MutableLiveData<>();
-    private MutableLiveData<Boolean> selectionMode = new MutableLiveData<>();
 
     @Inject
     public VideoListViewModel(VideoRepository videoRepository) {
         this.videoRepository = videoRepository;
 
         videoList.setValue(new ArrayList<>());
-        selectedVideoIds.setValue(new ArrayList<>());
-        selectionMode.setValue(false);
-
         updateData();
-
     }
 
     private void updateData(){
@@ -47,33 +41,6 @@ public class VideoListViewModel extends BaseViewModel {
 
     public LiveData<List<Video>> getVideoList() {
         return videoList;
-    }
-
-    public LiveData<List<Integer>> getSelectedVideoIds() {
-        return selectedVideoIds;
-    }
-
-    public LiveData<Boolean> getSelectionMode() {
-        return selectionMode;
-    }
-
-    public void changeVideoSelectionState(int videoId){
-        selectionMode.setValue(true);
-
-        if(selectedVideoIds.getValue().contains(videoId)){
-            selectedVideoIds.getValue().remove(Integer.valueOf(videoId));
-
-        } else {
-            selectedVideoIds.getValue().add(videoId);
-        }
-
-        selectedVideoIds.setValue(selectedVideoIds.getValue());
-    }
-
-    public void turnOffSelectionMode(){
-        selectionMode.setValue(false);
-        selectedVideoIds.getValue().clear();
-        selectedVideoIds.setValue(selectedVideoIds.getValue());
     }
 
 }
