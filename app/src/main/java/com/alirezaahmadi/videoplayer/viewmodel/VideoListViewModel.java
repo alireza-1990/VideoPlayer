@@ -27,8 +27,11 @@ public class VideoListViewModel extends BaseViewModel {
     public VideoListViewModel(VideoRepository videoRepository) {
         this.videoRepository = videoRepository;
 
+        videoList.setValue(new ArrayList<>());
         selectedVideoIds.setValue(new ArrayList<>());
         selectionMode.setValue(false);
+
+        updateData();
 
     }
 
@@ -39,12 +42,10 @@ public class VideoListViewModel extends BaseViewModel {
                 .subscribe(videos -> videoList.setValue(videos));
 
         addToUnsubsribed(disposable);
+
     }
 
     public LiveData<List<Video>> getVideoList() {
-        if(videoList.getValue() == null)
-            updateData();
-
         return videoList;
     }
 

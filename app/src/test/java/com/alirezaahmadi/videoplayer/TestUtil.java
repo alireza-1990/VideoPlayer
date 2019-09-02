@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestUtil {
 
-    public static List<Video> getVideoList() {
+    public static List<Video> getMockVideoList() {
         List<Video> videoList = new ArrayList<>();
 
         Video video1 = new Video();

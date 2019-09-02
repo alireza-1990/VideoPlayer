@@ -29,7 +29,7 @@ public class StorageUtilTest {
     @Before
     public void init(){
         contentResolver = Mockito.mock(ContentResolver.class);
-        originalList = TestUtil.getVideoList();
+        originalList = TestUtil.getMockVideoList();
 
         MatrixCursor videoCursor = new MatrixCursor(new String[] { MediaStore.Video.VideoColumns._ID,
                 MediaStore.Video.VideoColumns.TITLE,

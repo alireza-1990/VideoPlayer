@@ -9,14 +9,12 @@ import com.alirezaahmadi.videoplayer.repository.VideoRepository;
 import com.alirezaahmadi.videoplayer.TestUtil;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 import static org.junit.Assert.*;
@@ -51,7 +49,7 @@ public class PlayerViewModelTest extends BaseTest {
 
         viewModel = new PlayerViewModel(videoRepository, audioManager);
 
-        List<Video> originalList = TestUtil.getVideoList();
+        List<Video> originalList = TestUtil.getMockVideoList();
         when(videoRepository.getVideoList()).thenReturn(Observable.just(originalList));
 
         when(audioManager.getStreamMaxVolume(anyInt())).thenReturn(15);

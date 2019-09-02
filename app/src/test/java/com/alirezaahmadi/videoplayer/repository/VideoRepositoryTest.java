@@ -26,7 +26,7 @@ public class VideoRepositoryTest {
     @Before
     public void init(){
         storageUtil = mock(StorageUtil.class);
-        mockVideoList = TestUtil.getVideoList();
+        mockVideoList = TestUtil.getMockVideoList();
         when(storageUtil.getAllVideos()).thenReturn(mockVideoList);
         when(storageUtil.getVideosForIds(new String[]{"2"})).thenReturn(mockVideoList.subList(0, 1));
 
