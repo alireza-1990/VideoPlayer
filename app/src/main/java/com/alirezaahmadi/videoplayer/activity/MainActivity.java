@@ -41,9 +41,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(VideoListViewModel.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(VideoListViewModel.class);
 
         tabLayout = findViewById(R.id.main_tab_layout);
         viewPager = findViewById(R.id.main_view_pager);
