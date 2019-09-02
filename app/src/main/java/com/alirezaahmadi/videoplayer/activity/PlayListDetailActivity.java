@@ -117,7 +117,9 @@ public class PlayListDetailActivity extends BaseActivity implements VideoAdapter
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        adapter.cancelSelectionMode();
+//        adapter.cancelSelectionMode();
+        //todo call viewmodel isntead
+
     }
 
     @Override

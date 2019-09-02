@@ -62,10 +62,6 @@ public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickLi
         notifyDataSetChanged();
     }
 
-    public void cancelSelectionMode(){
-        notifyDataSetChanged();
-    }
-
     public List<Integer> getSelectedList() {
         return selectedList;
     }
