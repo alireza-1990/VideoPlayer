@@ -2,7 +2,7 @@ package com.alirezaahmadi.videoplayer.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+
 import android.media.AudioManager;
 
 import com.alirezaahmadi.videoplayer.model.Video;
@@ -12,7 +12,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -35,7 +34,7 @@ public class PlayerViewModel extends BaseViewModel {
     public PlayerViewModel(VideoRepository videoRepository, AudioManager audioManager) {
         this.videoRepository = videoRepository;
         this.audioManager = audioManager;
-        setCurrentVolumeVlue();
+        setCurrentVolumeVolume();
     }
 
     public void init(int videoId){
@@ -71,7 +70,7 @@ public class PlayerViewModel extends BaseViewModel {
     }
 
     public LiveData<Integer> getVolumeValue() {
-        setCurrentVolumeVlue();
+        setCurrentVolumeVolume();
         return volumeValue;
     }
 
@@ -86,19 +85,19 @@ public class PlayerViewModel extends BaseViewModel {
         }
     }
 
-    private void setCurrentVolumeVlue(){
+    private void setCurrentVolumeVolume(){
         int value = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         volumeValue.setValue(value);
     }
 
     public void volumeUp(){
         audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
-        setCurrentVolumeVlue();
+        setCurrentVolumeVolume();
     }
 
     public void volumeDown(){
         audioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
-        setCurrentVolumeVlue();
+        setCurrentVolumeVolume();
     }
 
     public void next(){

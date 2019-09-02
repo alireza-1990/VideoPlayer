@@ -59,13 +59,6 @@ public class PlaylistRepositoryTest {
         assertEquals(playlist.getTitle(), "Playlist one");
     }
 
-    //todo test takes forever!
-//    @Test
-//    public void ifPlayListDoesNotExists_getPlaylistById_returnsNull(){
-//        Playlist playlist = playlistRepository.getPlaylistById(1).blockingFirst();
-//        assertNull(playlist);
-//    }
-
     @Test
     public void addPlaylist_addsThePlaylistToTheDb() {
         Playlist playlist = new Playlist("Playlist one");

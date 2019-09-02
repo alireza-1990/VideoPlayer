@@ -32,7 +32,6 @@ public class VideoRepository {
                 .toObservable()
                 .flatMap(playlistItems -> {
                     String[] videoIds = new String[playlistItems.size()];
-                    //todo Change api to get Int list
                     for (int i = 0; i < playlistItems.size(); i++)
                         videoIds[i] = String.valueOf(playlistItems.get(i).getVideoId());
 

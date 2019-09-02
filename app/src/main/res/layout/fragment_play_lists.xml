@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/space_1"
         android:clipToPadding="false"
-        android:layout_below="@id/item_new_playlist_input"
         />
 
 </RelativeLayout>

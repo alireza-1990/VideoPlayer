@@ -87,8 +87,6 @@ public class AddToPlaylistDialogFragment extends DialogFragment implements Playl
     @Override
     public void onItemClicked(int playlistId) {
         viewModel.addVideosToPlaylist(viewModel.getVideoIdsToAdd(), playlistId);
-
-        //todo showing without condition?
         Toast.makeText(getActivity(), R.string.successfuly_added_to_playlist, Toast.LENGTH_LONG).show();
         dismiss();
     }

@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(RobolectricTestRunner.class)
 public class PlaylistViewModelTest extends BaseTest {
 
     private PlaylistRepository playlistRepository;
@@ -43,6 +46,7 @@ public class PlaylistViewModelTest extends BaseTest {
 
         when(playlistRepository.getPlaylists()).thenReturn(Flowable.just(mockPlaylists));
         when(playlistRepository.addPlaylist(any())).thenReturn(Single.just(new Object()));
+        when(playlistRepository.deletePlayList(anyInt())).thenReturn(Single.just(new Object()));
         when(playlistItemRepository.addVideoToPlayList(any(), anyInt())).thenReturn(Single.just(new Object()));
 
         playlistViewModel = new PlaylistViewModel(playlistRepository, playlistItemRepository);
@@ -60,7 +64,6 @@ public class PlaylistViewModelTest extends BaseTest {
         verify(playlistRepository, times(1)).addPlaylist(any());
     }
 
-    //todo doesn't work. why?
     @Test
     public void deletePlaylists_callsTheRepositoryOnce() {
         playlistViewModel.deletePlayList(2);

@@ -43,8 +43,6 @@ public class VideoRepositoryTest {
         TestUtil.assertEqualsVideoLists(videoList, this.mockVideoList);
     }
 
-
-    //todo test not working... decide to keep or remove
     @Test
     public void getPlaylistVideos() {
         List<Video> videoList = videoRepository.getPlaylistVideos(1).blockingFirst();

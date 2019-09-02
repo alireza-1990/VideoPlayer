@@ -6,7 +6,6 @@ import com.alirezaahmadi.videoplayer.BaseTest;
 import com.alirezaahmadi.videoplayer.model.Video;
 import com.alirezaahmadi.videoplayer.repository.VideoRepository;
 import com.alirezaahmadi.videoplayer.TestUtil;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -89,8 +88,6 @@ public class VideoListViewModelTest extends BaseTest  {
         viewModel.changeVideoSelectionState(10);
         assertEquals(true, viewModel.getSelectionMode().getValue());
     }
-
-    //todo notify observers test cases with actual values.
 
     @Test
     public void whenSelectionModeIsOn_callingTurnOffSelectionMode_makeSelectionModeOff(){

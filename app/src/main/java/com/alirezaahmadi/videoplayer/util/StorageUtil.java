@@ -93,7 +93,6 @@ public class StorageUtil {
         return null;
     }
 
-    //todo how to test this function?!
     private String makePlaceholders(int len) {
         if (len < 1) {
             throw new RuntimeException("No placeholders");

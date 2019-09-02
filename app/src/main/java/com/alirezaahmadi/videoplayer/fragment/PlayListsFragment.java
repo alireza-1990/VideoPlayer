@@ -55,8 +55,6 @@ public class PlayListsFragment extends Fragment implements PlaylistAdapter.Playl
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setNestedScrollingEnabled(false); //todo know why?
-
         viewModel.getPlaylists().observe(this, playlists -> adapter.setPlaylists(playlists));
         adapter.setPlaylistClickListener(this);
         adapter.setPlaylistNewItemListener(this);

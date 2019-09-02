@@ -20,7 +20,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-//todo add DiffUtil
+//todo add DiffUtil for better performance
 public class VideoAdapter extends RecyclerView.Adapter implements View.OnClickListener, View.OnLongClickListener {
 
     public interface VideoClickListener {
