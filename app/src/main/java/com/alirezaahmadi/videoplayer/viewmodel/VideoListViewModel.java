@@ -69,4 +69,10 @@ public class VideoListViewModel extends BaseViewModel {
 
         selectedVideoIds.setValue(selectedVideoIds.getValue());
     }
+
+    public void turnOffSelectionMode(){
+        selectionMode.setValue(false);
+        selectedVideoIds.getValue().clear();
+        selectedVideoIds.setValue(selectedVideoIds.getValue());
+    }
 }

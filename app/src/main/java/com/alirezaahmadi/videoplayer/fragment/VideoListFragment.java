@@ -62,10 +62,13 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
 
         viewModel.getVideoList().observe(this, videos -> adapter.setVideoList(videos));
 
-        viewModel.getSelectionMode().observe(this, selectionState -> {
-            if(selectionState)
-                actionMode = getActivity().startActionMode(this);
-        });
+        actionMode = getActivity().startActionMode(this);
+
+
+//        viewModel.getSelectionMode().observe(this, selectionState -> {
+//            if(selectionState)
+//                actionMode = getActivity().startActionMode(this);
+//        });
 
         viewModel.getSelectedVideoIds().observe(this, selectedVideosIds ->
                 adapter.setSelectedList(selectedVideosIds));
@@ -121,6 +124,8 @@ public class VideoListFragment extends Fragment implements VideoAdapter.VideoCli
     public void closeActionMode(){
         if(actionMode != null)
             actionMode.finish();
+
+        viewModel.turnOffSelectionMode();
     }
 
     @Override
