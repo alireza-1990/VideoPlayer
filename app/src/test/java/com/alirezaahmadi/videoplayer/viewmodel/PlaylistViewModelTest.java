@@ -21,6 +21,7 @@ import io.reactivex.Single;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -42,7 +43,7 @@ public class PlaylistViewModelTest extends BaseTest {
 
         when(playlistRepository.getPlaylists()).thenReturn(Flowable.just(mockPlaylists));
         when(playlistRepository.addPlaylist(any())).thenReturn(Single.just(new Object()));
-        when(playlistItemRepository.addVideoToPlayList(any(), any())).thenReturn(Single.just(new Object()));
+        when(playlistItemRepository.addVideoToPlayList(any(), anyInt())).thenReturn(Single.just(new Object()));
 
         playlistViewModel = new PlaylistViewModel(playlistRepository, playlistItemRepository);
     }
@@ -59,6 +60,7 @@ public class PlaylistViewModelTest extends BaseTest {
         verify(playlistRepository, times(1)).addPlaylist(any());
     }
 
+    //todo doesn't work. why?
     @Test
     public void deletePlaylists_callsTheRepositoryOnce() {
         playlistViewModel.deletePlayList(2);

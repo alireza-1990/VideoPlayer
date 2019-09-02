@@ -13,6 +13,7 @@ import java.util.List;
 import io.reactivex.Flowable;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +32,7 @@ public class VideoRepositoryTest {
         when(storageUtil.getVideosForIds(new String[]{"2"})).thenReturn(mockVideoList.subList(0, 1));
 
         playlistItemDao = mock(PlaylistItemDao.class);
-        when(playlistItemDao.loadPlayListItems(any())).thenReturn(Flowable.just(TestUtil.getMockPlaylistItems()));
+        when(playlistItemDao.loadPlayListItems(anyInt())).thenReturn(Flowable.just(TestUtil.getMockPlaylistItems()));
 
         videoRepository = new VideoRepository(storageUtil, playlistItemDao);
     }
