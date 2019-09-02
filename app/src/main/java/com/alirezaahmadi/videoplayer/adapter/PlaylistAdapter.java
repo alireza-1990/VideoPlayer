@@ -25,16 +25,23 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int TYPE_NEW = 1;
     private static final int TYPE_ITEM = 2;
 
-    public interface PlaylistAdapterListener {
-        void onNewPlaylistAdded(String playlistTitle);
+    public interface PlaylistClickListener {
         void onItemClicked(int playlistId);
+    }
+
+    public interface PlaylistNewItemListener {
+        void onNewPlaylistAdded(String playlistTitle);
+    }
+
+    public interface PlaylistDeleteListener {
         void onDeleteClicked(int playlistId);
     }
 
     private Application application;
     private List<Playlist> playlists;
-    private PlaylistAdapterListener listener;
-    private DeleteClickListener deleteClickListener;
+    private PlaylistClickListener playlistClickListener;
+    private PlaylistNewItemListener playlistNewItemListener;
+    private PlaylistDeleteListener playlistDeleteListener;
 
     private boolean showDelete;
 
@@ -42,7 +49,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.application = application;
         this.showDelete = showDelete;
         playlists = new ArrayList<>();
-        deleteClickListener = new DeleteClickListener();
     }
 
     public void setPlaylists(List<Playlist> playlists) {
@@ -50,8 +56,16 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
-    public void setListener(PlaylistAdapterListener listener) {
-        this.listener = listener;
+    public void setPlaylistClickListener(PlaylistClickListener playlistClickListener) {
+        this.playlistClickListener = playlistClickListener;
+    }
+
+    public void setPlaylistNewItemListener(PlaylistNewItemListener playlistNewItemListener) {
+        this.playlistNewItemListener = playlistNewItemListener;
+    }
+
+    public void setPlaylistDeleteListener(PlaylistDeleteListener playlistDeleteListener) {
+        this.playlistDeleteListener = playlistDeleteListener;
     }
 
     class NewPlaylistHolder extends RecyclerView.ViewHolder {
@@ -95,10 +109,12 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_playlist, parent, false);
                 ItemHolder itemHolder = new ItemHolder(view);
                 itemHolder.itemView.setOnClickListener(this);
-                itemHolder.deleteIcon.setOnClickListener(deleteClickListener);
 
-                if(!showDelete)
+                if(!showDelete) {
                     itemHolder.deleteIcon.setVisibility(View.GONE);
+                } else {
+                    itemHolder.deleteIcon.setOnClickListener(this);
+                }
 
                 return itemHolder;
             }
@@ -132,10 +148,17 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onClick(View v) {
-        int playlistId = (int) v.getTag();
-        if(listener != null)
-            listener.onItemClicked(playlistId);
+    public void onClick(View view) {
+        int playlistId = (int) view.getTag();
+
+        if(view.getId() == R.id.item_playlist_delete){
+            if(playlistDeleteListener != null)
+                playlistDeleteListener.onDeleteClicked(playlistId);
+
+        } else {
+            if (playlistClickListener != null)
+                playlistClickListener.onItemClicked(playlistId);
+        }
     }
 
     @Override
@@ -145,21 +168,12 @@ public class PlaylistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if(text.trim().isEmpty())
                 Toast.makeText(application, R.string.error_empty_playlist_name, Toast.LENGTH_SHORT).show();
 
-            else if(listener != null)
-                listener.onNewPlaylistAdded(text);
+            else if(playlistNewItemListener != null)
+                playlistNewItemListener.onNewPlaylistAdded(text);
 
             textView.setText(null);
             return true;
         }
         return false;
-    }
-
-    private class DeleteClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            int playlistId = (int) v.getTag();
-            if(listener != null)
-                listener.onDeleteClicked(playlistId);
-        }
     }
 }

@@ -28,7 +28,7 @@ import javax.inject.Named;
 
 import dagger.android.support.AndroidSupportInjection;
 
-public class AddToPlaylistDialogFragment extends DialogFragment implements PlaylistAdapter.PlaylistAdapterListener {
+public class AddToPlaylistDialogFragment extends DialogFragment implements PlaylistAdapter.PlaylistClickListener, PlaylistAdapter.PlaylistNewItemListener {
     private static final String ARG_VIDEO_IDS = "video_ids";
 
     @Inject DaggerViewModelFactory viewModelFactory;
@@ -38,7 +38,7 @@ public class AddToPlaylistDialogFragment extends DialogFragment implements Playl
     private PlaylistViewModel viewModel;
     private RecyclerView.LayoutManager layoutManager;
 
-    public static AddToPlaylistDialogFragment newInstance(List<Integer> videoIds){
+    static AddToPlaylistDialogFragment newInstance(List<Integer> videoIds){
         AddToPlaylistDialogFragment fragment = new AddToPlaylistDialogFragment();
         Bundle args = new Bundle();
         args.putIntArray(ARG_VIDEO_IDS, CommonUtil.convertIntegerListToArray(videoIds));
@@ -73,7 +73,8 @@ public class AddToPlaylistDialogFragment extends DialogFragment implements Playl
 
         viewModel.getPlaylists().observe(this, playlists -> adapter.setPlaylists(playlists));
 
-        adapter.setListener(this);
+        adapter.setPlaylistClickListener(this);
+        adapter.setPlaylistNewItemListener(this);
 
         return view;
     }
@@ -99,11 +100,5 @@ public class AddToPlaylistDialogFragment extends DialogFragment implements Playl
 
         super.onDismiss(dialog);
     }
-
-    @Override
-    public void onDeleteClicked(int playlistId) {
-
-    }
-
 
 }

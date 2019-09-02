@@ -24,7 +24,7 @@ import javax.inject.Named;
 
 import dagger.android.support.AndroidSupportInjection;
 
-public class PlayListsFragment extends Fragment implements PlaylistAdapter.PlaylistAdapterListener {
+public class PlayListsFragment extends Fragment implements PlaylistAdapter.PlaylistClickListener, PlaylistAdapter.PlaylistNewItemListener, PlaylistAdapter.PlaylistDeleteListener {
 
     @Inject DaggerViewModelFactory viewModelFactory;
     @Inject @Named("withDelete") PlaylistAdapter adapter;
@@ -58,7 +58,9 @@ public class PlayListsFragment extends Fragment implements PlaylistAdapter.Playl
         recyclerView.setNestedScrollingEnabled(false); //todo know why?
 
         viewModel.getPlaylists().observe(this, playlists -> adapter.setPlaylists(playlists));
-        adapter.setListener(this);
+        adapter.setPlaylistClickListener(this);
+        adapter.setPlaylistNewItemListener(this);
+        adapter.setPlaylistDeleteListener(this);
 
         return view;
     }
